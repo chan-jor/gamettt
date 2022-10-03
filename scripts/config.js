@@ -3,13 +3,21 @@
 // 사용자 입력을 받아서 유효성을 검사하고 저장하는 파일
 
 // index.html 스크립트 순서에 따라 작동 가능
-// player 1,2 button click eventlistener
+// player 1,2 button click eventlistener 눌렀을 때 aside 창 열기
 function openPlayerConfig() {
   playerConfigOverlayElement.style.display = "block";
   backdropElement.style.display = "block";
 }
 
+// cancel 버튼 배경화면 누르면 aside 창 닫음
 function closePlayerConfig() {
   playerConfigOverlayElement.style.display = "none";
   backdropElement.style.display = "none";
+}
+
+function savePlayerConfig(event) {
+  event.preventDefault(); // 기본값 방지(제출하지 않음)
+  const formData = new FormData(event.target);
+  const enteredPlayername = formData.get("playername");
+  console.log(enteredPlayername);
 }
