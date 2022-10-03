@@ -4,7 +4,9 @@
 
 // index.html 스크립트 순서에 따라 작동 가능
 // player 1,2 button click eventlistener 눌렀을 때 aside 창 열기
-function openPlayerConfig() {
+function openPlayerConfig(event) {
+  editedPlayer = +event.target.dataset.playerid; // +'1' => 1
+
   playerConfigOverlayElement.style.display = "block";
   backdropElement.style.display = "block";
 }
@@ -15,6 +17,7 @@ function closePlayerConfig() {
   backdropElement.style.display = "none";
   formElement.firstElementChild.classList.remove("error");
   errorsOutputElement.textContent = "";
+  formElement.firstElementChild.lastElementChild.value = "";
 }
 
 // player name 양식 제출 및 유효성 검사, 오류
@@ -28,4 +31,19 @@ function savePlayerConfig(event) {
     errorsOutputElement.textContent = "Please enter a valid name!";
     return;
   }
+
+  const updatedPlayerDataElement = document.getElementById(
+    `player-${editedPlayer}-data`
+  );
+  updatedPlayerDataElement.children[1].textContent = enteredPlayername;
+
+  //   if (editedPlayer === 1) {
+  //     players[0].name = enteredPlayername;
+  //   } else {
+  //     players[1].name = enteredPlayername;
+  //   }
+
+  players[editedPlayer - 1].name = enteredPlayername;
+
+  closePlayerConfig();
 }
