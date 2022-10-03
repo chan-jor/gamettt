@@ -13,11 +13,19 @@ function openPlayerConfig() {
 function closePlayerConfig() {
   playerConfigOverlayElement.style.display = "none";
   backdropElement.style.display = "none";
+  formElement.firstElementChild.classList.remove("error");
+  errorsOutputElement.textContent = "";
 }
 
+// player name 양식 제출 및 유효성 검사, 오류
 function savePlayerConfig(event) {
   event.preventDefault(); // 기본값 방지(제출하지 않음)
   const formData = new FormData(event.target);
-  const enteredPlayername = formData.get("playername");
-  console.log(enteredPlayername);
+  const enteredPlayername = formData.get("playername").trim();
+  //   console.log(enteredPlayername);
+  if (!enteredPlayername) {
+    event.target.firstElementChild.classList.add("error");
+    errorsOutputElement.textContent = "Please enter a valid name!";
+    return;
+  }
 }
