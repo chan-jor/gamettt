@@ -1,5 +1,11 @@
 // 여러가지를(모든 상수, 변수) 초기화 시키는 가장 먼저 실행되어야 하는 파일
 
+const gameData = [
+  [0, 0, 0],
+  [0, 0, 0],
+  [0, 0, 0],
+];
+
 let editedPlayer = 0;
 let activePlayer = 0;
 
